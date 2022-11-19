@@ -7,25 +7,26 @@ import org.javacord.api.event.message.MessageCreateEvent;
 import org.javacord.api.listener.message.MessageCreateListener;
 
 import com.github.hakosuka0165.triviabot.Main;
+import com.github.hakosuka0165.triviabot.Bibliotheque;
+import com.github.hakosuka0165.triviabot.Question;
 
 public class Round implements MessageCreateListener {
-	private static int difficulty; // Difficulty ranges from 1 (Easy) to 3 (Hard)
-	
-	
 	@Override
 	public void onMessageCreate(MessageCreateEvent event) {
 		// TODO Auto-generated method stub
-		String content = event.getMessageContent();
-		if(content.substring(0, 11).equalsIgnoreCase(Main.prefix + "roundstart")) {
-			new MessageBuilder()
-			.setContent("Looks like it worked " + content.substring(12))
-			.send(event.getChannel());
+		String command = event.getMessageContent();
+		if(command.equalsIgnoreCase(Main.prefix + "roundstart")) {
+			Question[] container = Bibliotheque.library;
+			Question[] shuffledContainer = Bibliotheque.ShuffleQuestions(container);
 			
-			new MessageBuilder()
-			.addComponents(
-					ActionRow.of(Button.success("success", "True"),
-							Button.danger("danger", "False")))
-			.send(event.getChannel());
+			for (int i = shuffledContainer.length - 1; i > 0; --i) {
+				new MessageBuilder()
+				.setContent(shuffledContainer[i].q)
+				.addComponents(
+						ActionRow.of(Button.success("success", "True"),
+								Button.danger("danger", "False")))
+				.send(event.getChannel());
+			}
 		}
 	}
 
