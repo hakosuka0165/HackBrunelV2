@@ -12,10 +12,6 @@ import org.javacord.api.entity.intent.Intent;
 import org.javacord.api.entity.message.MessageBuilder;
 import org.javacord.api.entity.message.component.ActionRow;
 import org.javacord.api.entity.message.component.Button;
-import org.javacord.api.interaction.SlashCommand;
-import org.javacord.api.interaction.SlashCommandInteraction;
-import org.javacord.api.interaction.SlashCommandOption;
-import org.javacord.api.interaction.SlashCommandOptionType;
 
 import com.github.hakosuka0165.triviabot.command.Round;
 
@@ -31,43 +27,12 @@ public class Main {
 				.addIntents(Intent.MESSAGE_CONTENT)
 				.login().join();
 		
-		/*
-		TextChannel channel = api.getTextChannelById("1043543184912961666").get();
-		new MessageBuilder()
-		.setContent("Test question")
-		.addComponents(
-				ActionRow.of(Button.success("success", "True"),
-						Button.danger("danger", "False")))
-		.send(channel);
+		api.addMessageCreateListener(new Round());
 		
-		api.addMessageCreateListener(event -> {
-			if (event.getMessageContent().equalsIgnoreCase("!ping")) {
-				event.getChannel().sendMessage("Pong!");
-			}
-		});
-		
-		SlashCommand roundstart = SlashCommand.with("roundstart", "Begins a new round of Trivia Bot",
-				Arrays.asList(
-						SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "easy", "Start a game on easy difficulty"),
-						SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "medium", "Start a game on medium difficulty"),
-						SlashCommandOption.createWithOptions(SlashCommandOptionType.SUB_COMMAND, "hard", "Start a game on hard difficulty")))
-				.createGlobal(api)
-				.join();
-		
-		api.addSlashCommandCreateListener(event -> {
-			SlashCommandInteraction interaction = event.getSlashCommandInteraction();
-			if (interaction.getFullCommandName().equals("roundstart hard")) {
-				new MessageBuilder()
-				.setContent("Click here");
-			}
-		});
-
 		api.addMessageComponentCreateListener(event -> {
 			event.getMessageComponentInteraction().acknowledge();
+			System.out.println("Hello!");
 		});
-		*/
-		
-		api.addMessageCreateListener(new Round());
 		
 		System.out.println("You can invite the bot using the following URL\n" + api.createBotInvite());
 	}
