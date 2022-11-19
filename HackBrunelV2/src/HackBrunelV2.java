@@ -1,7 +1,7 @@
 import swiftbot.SwiftBotAPI;
 import swiftbot.SwiftBotAPI.Underlight;
 
-public class HAckBrunelV2 {
+public class HackBrunelV2 {
 	static SwiftBotAPI swiftBot;
 
 	public static void main(String[] args) throws InterruptedException {
@@ -15,29 +15,47 @@ public class HAckBrunelV2 {
 		}
 		// The Discord Robot will send: true or false;
 
-		// ServerHandler server = new ServerHandler(args[0]);
+		ServerHandler server = new ServerHandler(args[0]);
 		String input;
-//		while (true) {
-//			input = server.ReceiveString(); // input = "true"; input = "false";
-//			if (input.compareTo("terminate") == 0) {
-//				break;
-//			} else {
-//				System.out.println(input);
-//			}
-//		}
-		input = "true";
-
-		if (input.compareTo("true") == 0) {
-
-			useUnderlighting();
-			int speed = 80;
-			moveSwiftbot(speed);
-			moveWheel();
-
-		} else {
-			redLighting();
-
+		boolean runLoop = true;
+		while (runLoop) {
+			input = server.ReceiveString(); // input = "true"; input = "false";
+			String[] inputArgs = input.split("\\s");
+			switch (inputArgs[0]) {
+			case "terminate":
+				runLoop = false;
+				break;
+			case "move":
+				int speed = Integer.valueOf(inputArgs[1]);
+				moveSwiftbot(speed);
+				break;
+			case "spin":
+				moveWheel();
+				break;
+			case "correct":
+				useUnderlighting();
+				moveSwiftbot(80);
+				moveWheel();
+				break;
+			case "wrong":
+				redLighting();
+				break;
+			default:
+				System.out.println("Invalid command " + inputArgs[0]);
+				break;
+			}
 		}
+		/*
+		 * input = "true";
+		 * 
+		 * if (input.compareTo("true") == 0) {
+		 * 
+		 * useUnderlighting(); int speed = 80; moveSwiftbot(speed); moveWheel();
+		 * 
+		 * } else { redLighting();
+		 * 
+		 * }
+		 */
 
 	}
 
