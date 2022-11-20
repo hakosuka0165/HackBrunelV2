@@ -1,3 +1,8 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+
 import swiftbot.SwiftBotAPI;
 import swiftbot.SwiftBotAPI.Underlight;
 
@@ -15,35 +20,122 @@ public class HackBrunelV2 {
 		}
 		// The Discord Robot will send: true or false;
 
-		ServerHandler server = new ServerHandler(args[0]);
-		String input;
-		boolean runLoop = true;
-		while (runLoop) {
-			input = server.ReceiveString(); // input = "true"; input = "false";
-			String[] inputArgs = input.split("\\s");
-			switch (inputArgs[0]) {
-			case "terminate":
-				runLoop = false;
-				break;
-			case "move":
-				int speed = Integer.valueOf(inputArgs[1]);
-				moveSwiftbot(speed);
-				break;
-			case "spin":
-				moveWheel();
-				break;
-			case "correct":
-				useUnderlighting();
-				moveSwiftbot(80);
-				moveWheel();
-				break;
-			case "wrong":
-				redLighting();
-				break;
-			default:
-				System.out.println("Invalid command " + inputArgs[0]);
-				break;
+		System.out.println(
+			".___________..______       __  ____    ____  __       ___      .______     ______   .___________.\r\n"
+			+ "|           ||   _  \\     |  | \\   \\  /   / |  |     /   \\     |   _  \\   /  __  \\  |           |\r\n"
+			+ "`---|  |----`|  |_)  |    |  |  \\   \\/   /  |  |    /  ^  \\    |  |_)  | |  |  |  | `---|  |----`\r\n"
+			+ "    |  |     |      /     |  |   \\      /   |  |   /  /_\\  \\   |   _  <  |  |  |  |     |  |     \r\n"
+			+ "    |  |     |  |\\  \\----.|  |    \\    /    |  |  /  _____  \\  |  |_)  | |  `--'  |     |  |     \r\n"
+			+ "    |__|     | _| `._____||__|     \\__/     |__| /__/     \\__\\ |______/   \\______/      |__|     \r\n"
+			+ "                                                                                                 "
+				);
+		
+		if(args.length > 0) 
+		{
+			
+			ServerHandler server = new ServerHandler(args[0]);
+			String input;
+			boolean runLoop = true;
+			while (runLoop) {
+				input = server.ReceiveString(); // input = "true"; input = "false";
+				String[] inputArgs = input.split("\\s");
+				switch (inputArgs[0]) {
+				case "terminate":
+					runLoop = false;
+					break;
+				case "move":
+					int speed = Integer.valueOf(inputArgs[1]);
+					moveSwiftbot(speed);
+					break;
+				case "spin":
+					moveWheel();
+					break;
+				case "rlights":
+					redLighting();
+					break;
+				case "glights":
+					useUnderlighting();
+					break;
+				case "correct":
+					useUnderlighting();
+					moveSwiftbot(80);
+					moveWheel();
+					break;
+				case "wrong":
+					redLighting();
+					break;
+				default:
+					System.out.println("Invalid command " + inputArgs[0]);
+					break;
+				}
 			}
+		}
+		else 
+		{
+			System.out.println("Running offline mode");
+			
+			ArrayList<Question> questions = new ArrayList<Question>();
+			
+			Scanner console = new Scanner(System.in);
+
+			while(true)
+			{
+				AddArrayToList(questions, Questions.easyQuestions);
+				AddArrayToList(questions, Questions.mediumQuestions);
+				AddArrayToList(questions, Questions.hardQuestions);
+				
+				Collections.shuffle(questions);
+				
+				while(questions.size() > 0) 
+				{
+					Question q = questions.get(0);
+					
+					System.out.println(q.q);
+					
+					String answer = console.nextLine();
+					
+					boolean a;
+					
+					if(answer.charAt(0) == 't') 
+					{
+						a = true;
+					}
+					else if(answer.charAt(0) == 'f') 
+					{
+						a = false;
+					}
+					else 
+					{
+						System.out.println("Invalid answer, type true or false...");
+						continue;
+					}
+					
+					if(a != q.a) 
+					{
+						redLighting();
+						moveSwiftbot(-40);
+					}
+					else 
+					{
+						useUnderlighting();
+						switch(q.d) 
+						{
+						case 0:
+							moveSwiftbot(80);
+							break;
+						case 1:
+							moveSwiftbot(80);
+							break;
+						case 2:
+							moveSwiftbot(80);
+							break;
+						}
+					}
+					
+					questions.remove(0);
+				}
+			}
+
 		}
 		/*
 		 * input = "true";
@@ -57,6 +149,13 @@ public class HackBrunelV2 {
 		 * }
 		 */
 
+	}
+	private static void AddArrayToList(ArrayList<Question> questionList, Question[] questionArray) 
+	{
+		for(int i = 0; i < questionArray.length; i++)
+		{
+			questionList.add(questionArray[i]);
+		}
 	}
 
 	public static void moveSwiftbot(int speed) {

@@ -1,55 +1,40 @@
-package hackathon;
-import swiftbot.SwiftBotAPI;
+public class Questions {
+	public static Question easyQuestions[] = {
+			new Question(false, "The chairs in the House of Common are red.", 0),
+			new Question(true, "The Eiffel Tower is located in Paris.", 0),
+			new Question(false, "1+1=5.", 0),
+			new Question(true, "WW1 began in the year 1914.", 0),
+			new Question(true, "Mount Everest is the tallest mountain in the world.", 0),
+			new Question(false, "Romeo and Juliet was written by JK Rowlings.", 0),
+			new Question(false, "January has 30 days.", 0),
+			new Question(true, "Ten Thousand has 4 zeros.", 0),
+			new Question(false, "Coldplay are a dance group.", 0),
+			new Question(true, "Light is faster than Sound.", 0),
+	};
+	public static Question mediumQuestions[] = {
+			new Question(false,"Harry Potter was almost sorted into HufflePuff.", 1),
+			new Question(true, "A touchdown is worth 6 points.", 1),
+			new Question(false,"Oxygen is the most common in the Atmosphere.", 1),
+			new Question(false, "Mike Tyson is known as The Greatest of All Time.", 1),
+			new Question(true, "The very first model of the iphone was released in 2007.", 1),
+			new Question(false, "Washington DC is the most populated city in USA.", 1),
+			new Question(false,"Elephants lay the largest egg", 1),
+			new Question(true,"Mars is also known as The Red Planet", 1),
+			new Question(false,"Bucharest isn't the Capital City of Romania", 1),
+			new Question(true,"A baby kangaroo is called Joey", 1)
+	};
 
-public class Hackathon1 {
-	
-	
-	
-
-public static void Easy_Questions() {
-	
-	Booleanthing questions [] = 
-		{
-		    new Booleanthing(false, "The chairs in the House of Common are red."),
-			new Booleanthing(true,"The Eiffel Tower is located in Paris. A:True"),
-			new Booleanthing(false, "1+1=5. A:False"),
-			new Booleanthing(true,"WW1 began in the year 1914."),
-			new Booleanthing(true,"Mount Everest is the tallest mountain in the world."),
-			new Booleanthing(false, "Romeo and Juliet was written by JK Rowlings."),
-			new Booleanthing(false,"January has 30 days."),
-			new Booleanthing(true, "Ten Thousand has 4 zeros."),
-			new Booleanthing(false, "Coldplay are a dance group."),
-			new Booleanthing(true,"Light is faster than Sound."),
-		};
-	
-}
-public static void Medium_Questions() {
-	Booleanthing questions[]= {
-			new Booleanthing(false,"Harry Potter was almost sorted into HufflePuff."),
-			new Booleanthing(true, "A touchdown is worth 6 points."),
-			new Booleanthing(false,"Oxygen is the most common in the Atmosphere."),
-			new Booleanthing(false, "Mike Tyson is known as The Greatest of All Time."),
-			new Booleanthing(true, "The very first model of the iphone was released in 2007."),
-			new Booleanthing(false, "Washington DC is the most populated city in USA."),
-			new Booleanthing(false,"Elephants lay the largest egg"),
-			new Booleanthing(true,"Mars is also known as The Red Planet"),
-			new Booleanthing(false,"Bucharest isn't the Capital City of Romania"),
-			new Booleanthing(true,"A baby kangaroo is called Joey")
-};
-}
-public static void Hard_Questions(boolean a, String b){
-	Booleanthing questions[]= {
-			new Booleanthing(false, "The Fibulas is the longest bone in the body"),
-			new Booleanthing(false, "Pluto is the smallest planet in the Solar System"),
-			new Booleanthing(true, "The heart has 4 valves"),
-			new Booleanthing(false, "Octopuses have 3 hearts"),
-			new Booleanthing(false, "Plutonium has the chemical symbol Pb"),
-			new Booleanthing(true, "Heptadecagon has 17 sides"),
-			new Booleanthing(false, "Goa is the colony of Italy"),
-			new Booleanthing(true,"Tamil is the oldest language in the world"),
-			new Booleanthing(true,"30 Countries fought in the Second World War"),
-			new Booleanthing(false,"Qatar has the oldest flag in the world"),
+	public static Question hardQuestions[]= {
+			new Question(false, "The Fibulas is the longest bone in the body", 2),
+			new Question(false, "Pluto is the smallest planet in the Solar System", 2),
+			new Question(true, "The heart has 4 valves", 2),
+			new Question(false, "Octopuses have 3 hearts", 2),
+			new Question(false, "Plutonium has the chemical symbol Pb", 2),
+			new Question(true, "Heptadecagon has 17 sides", 2),
+			new Question(false, "Goa is the colony of Italy", 2),
+			new Question(true,"Tamil is the oldest language in the world", 2),
+			new Question(true,"30 Countries fought in the Second World War", 2),
+			new Question(false,"Qatar has the oldest flag in the world", 2),
 			
 	};
-}
 }
