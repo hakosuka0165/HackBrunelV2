@@ -20,7 +20,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String token = "MTA0MzUxMDU5NjE2MDcyOTE4MQ.GndWB4.BhgHGzg10agkQU3q9YhuSCRdzbb4FTfHocKDU4";
+		String token = "";
 		
 		DiscordApi api = new DiscordApiBuilder()
 				.setToken(token)
